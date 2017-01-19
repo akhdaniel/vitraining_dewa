@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_vit_trx_tree" model="ir.ui.view">
+            <field name="name">vit.trx.tree</field>
+            <field name="model">vit.trx</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="trx" create="false">
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_vit_trx_form" model="ir.ui.view">
+            <field name="name">vit.trx.form</field>
+            <field name="model">vit.trx</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="trx" version="7.0"
+                      edit="false" >
+                    
+                    <header>
+                        <button class="btn-primary" string="OK" icon="fa-check-circle" type="object" name="action_confirm"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="debit"/>
+                            <field name="credit"/>
+                            <field name="user_id"/>
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_vit_trx_view">
+            <field name="name">Trx</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.trx</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_vit_trx_view_form">
+            <field name="act_window_id" ref="act_open_vit_trx_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_vit_trx_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_vit_trx_view_tree">
+            <field name="act_window_id" ref="act_open_vit_trx_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_vit_trx_tree"/>
+        </record>
+
+        <menuitem id="menu_vit_trx"
+                  parent="sales_team.menu_sales"
+                  sequence="20"
+                  action="act_open_vit_trx_view"/>
+
+    </data>
+</openerp>

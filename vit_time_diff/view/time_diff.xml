@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_vit_time_diff_tree" model="ir.ui.view">
+            <field name="name">vit.time_diff.tree</field>
+            <field name="model">vit.time_diff</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="diff">
+                    <field name="depart"/>
+                    <field name="arrive"/>
+                    <field name="time_diff"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_vit_time_diff_form" model="ir.ui.view">
+            <field name="name">vit.time_diff.form</field>
+            <field name="model">vit.time_diff</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="diff">
+                    <group colspan="4">
+                        <field name="depart"/>
+                        <field name="arrive"/>
+                        <field name="time_diff"/>
+
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_vit_time_diff_view">
+            <field name="name">Time Diff</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.time_diff</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_vit_time_diff_view_form">
+            <field name="act_window_id" ref="act_open_vit_time_diff_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_vit_time_diff_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_vit_time_diff_view_tree">
+            <field name="act_window_id" ref="act_open_vit_time_diff_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_vit_time_diff_tree"/>
+        </record>
+
+        <menuitem id="menu_vit_time_diff"
+                  parent="sales_team.menu_sales"
+                  sequence="50"
+                  action="act_open_vit_time_diff_view"/>
+    
+    </data>
+</openerp>

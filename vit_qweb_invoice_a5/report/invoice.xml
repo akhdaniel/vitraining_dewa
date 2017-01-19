@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report
+            id="report_invoice_a5_menu"
+            string="Invoice A5"
+            model="account.invoice"
+            report_type="qweb-pdf"
+            file="account.invoice"
+            name="vit_qweb_invoice_a5.invoice_report"
+        />
+
+        <template id="invoice_report_document">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <p><b>Invoice No <span t-field="doc.number"/></b></p>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <p>Custemer</p>
+                            <p><span t-field="doc.partner_id"/> </p>
+                        </div>
+                        <div class="col-xs-4">
+                            <p>Invoice Date</p>
+                            <p><span t-field="doc.date_invoice"/> </p>
+                            <img src="/vit_qweb_invoice_a5/static/src/img/logo2.png" style="width:200px"/>
+                        </div>
+                        <div class="col-xs-4">
+                            <img t-attf-src="/report/barcode?type=QR&amp;value=#{doc.number}&amp;width=200&amp;height=200"/>
+                        </div>
+                    </div>
+
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Account</th>
+                                <th>Quantity</th>
+                                <th>UoM</th>
+                                <th>Unit Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.invoice_line_ids" t-as="line">
+                                <td>
+                                    <img t-attf-src="data:image/*;base64, #{line.product_id.image_medium}"
+                                       t-att-alt="line.product_id.name"
+                                    />
+                                    <span t-field="line.product_id"/>
+                                </td>
+                                <td><span t-field="line.account_id"/> </td>
+                                <td><span t-field="line.quantity"/> </td>
+                                <td><span t-field="line.uom_id"/> </td>
+                                <td><span t-field="line.price_unit"/> </td>
+                                <td><span t-field="line.price_subtotal"/> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="invoice_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="vit_qweb_invoice_a5.invoice_report_document"
+                       t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="custom_a5_paperformat" model="report.paperformat">
+            <field name="name">A5 low margin</field>
+            <field name="default" eval="True" />
+            <field name="format">A5</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">4</field>
+            <field name="margin_bottom">4</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="report_invoice_a5_menu" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="vit_qweb_invoice_a5.custom_a5_paperformat"/>
+        </record>
+
+    </data>
+</openerp>

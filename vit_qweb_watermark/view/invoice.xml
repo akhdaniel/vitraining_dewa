@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="report_invoice_document_date_format" inherit_id="account.report_invoice_document">
+
+            <xpath expr="//div[@class='page']" position="inside">
+                <t t-if="o.state=='paid'">
+                    <div style="top:200px;position:absolute;opacity:0.25;width:100%;text-align:center;z-index:1000;">
+                        <img src="/vit_qweb_watermark/static/src/img/paid.jpg"/>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

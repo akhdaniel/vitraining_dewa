@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="index">
+            <t t-call="website.layout">
+
+                <p>Is User in Group Admin ? <t t-esc="is_admin"/></p>
+
+            </t>
+        </template>
+
+    </data>
+</openerp>

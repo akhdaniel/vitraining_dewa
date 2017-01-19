@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="index">
+
+            <t t-call="website.layout">
+                <h1>Sale Orders</h1>
+
+                <table id="sale_order_table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Sales Person</th>
+                            <th>Total</th>
+                            <th>Invoice Status</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="sale_orders" t-as="so">
+                            <td><span t-field="so.name"/></td>
+                            <td><span t-field="so.confirmation_date"/></td>
+                            <td><span t-field="so.partner_id"/></td>
+                            <td><span t-field="so.user_id"/></td>
+                            <td><span t-field="so.amount_total"/></td>
+                            <td><span t-field="so.invoice_status"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <script>
+                    $(document).ready(function(){
+                        $("#sale_order_table").DataTable({});
+
+                    })
+                </script>
+            </t>
+
+        </template>
+
+
+        <template id="index_ajax">
+
+            <t t-call="website.layout">
+                <h1>Sale Orders via AJAX</h1>
+
+                <table id="sale_order_table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Sales Person</th>
+                            <th>Total</th>
+                            <th>Invoice Status</th>
+                        </tr>
+
+                    </thead>
+                </table>
+
+                <script>
+                    $(document).ready(function(){
+                        $("#sale_order_table").DataTable({
+                            "ajax": "/vit/load_ajax"
+                        });
+                    })
+                </script>
+            </t>
+
+        </template>
+
+    </data>
+</openerp>
