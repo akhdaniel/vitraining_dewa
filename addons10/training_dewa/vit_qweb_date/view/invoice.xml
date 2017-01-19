@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="report_invoice_document_date_format" inherit_id="account.report_invoice_document">
+
+            <xpath expr="//div[@class='page']/div[@class='row mt32 mb32']/div[@class='col-xs-2'][2]/p" position="attributes">
+                <attribute name="t-field-options">{"format": "d MMM y"}</attribute>
+            </xpath>
+
+        </template>
+
+    </data>
+</openerp>

@@ -1,0 +1,5 @@
+th[data-id="amount_total_signed"],
+th[data-id="residual_signed"]
+{
+    text-align:right;
+}
