@@ -4,9 +4,9 @@
 	"depends": [
 		"base",
 	],
-	"author": "akhmad.daniel@gmail.com", 
+	"website": "http://vitraining.com",
+	"author": "akhmad.daniel@gmail.com [vitraining.com]",
 	"category": "Education", 
-	'website': 'http://www.vitraining.com',
 	"description": """\
 
 Manage
